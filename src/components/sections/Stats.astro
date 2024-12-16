@@ -5,21 +5,25 @@ const stats = [
   {
     number: "10K+",
     label: "Active Users",
+    icon: "users",
     delay: "0"
   },
   {
     number: "$2M+",
     label: "Expenses Tracked",
+    icon: "dollar-sign",
     delay: "100"
   },
   {
     number: "4.8",
     label: "App Rating",
+    icon: "star",
     delay: "200"
   },
   {
     number: "50+",
     label: "Contributors",
+    icon: "code-branch",
     delay: "300"
   }
 ];
@@ -40,15 +44,12 @@ const stats = [
 <style>
   .stats-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
+    gap: 1.5rem; 
     max-width: 1200px;
     margin: 0 auto;
   }
-
-  @media (max-width: 768px) {
-    .stats-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
+  .stats{
+    background-color: rgb(var(--color-primary));
   }
 </style>

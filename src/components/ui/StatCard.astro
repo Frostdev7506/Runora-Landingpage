@@ -2,40 +2,82 @@
 interface Props {
   number: string;
   label: string;
+  icon: string;
 }
 
-const { number, label } = Astro.props;
+const { number, label, icon } = Astro.props;
 ---
 
 <div class="stat-card">
-  <div class="number">{number}</div>
-  <div class="label">{label}</div>
+  <div class="icon-container">
+    <i class:list={["fa-solid", `fa-${icon}`]}></i>
+  </div>
+  <div class="content">
+    <div class="number">{number}</div>
+    <div class="label">{label}</div>
+  </div>
 </div>
 
 <style>
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css");
+  
   .stat-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background-color: #f0f4f8; /* Light background */
+    border: 1px solid #d9e2ec; /* Subtle border */
+    border-radius: 10px; /* Rounded corners */
     padding: 1.5rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Soft shadow */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Hover effect */
+  }
+
+  .stat-card:hover {
+    transform: translateY(-5px); /* Lift on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Stronger shadow on hover */
+  }
+
+  .icon-container {
+    background-color: rgb(var(--color-primary)); /* Example primary color */
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+  }
+
+  .content {
+    flex-grow: 1; /* Allow content to take up remaining space */
   }
 
   .number {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: white;
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #252f3f; /* Darker text color */
   }
 
   .label {
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    color: #555; /* Slightly muted text color */
   }
 
+  /* Responsive Design */
   @media (max-width: 768px) {
-    .number {
-      font-size: 2rem;
+    .stat-card {
+      flex-direction: column; /* Stack elements vertically on smaller screens */
+      text-align: center;
     }
 
-    .label {
-      font-size: 1rem;
+    .icon-container {
+      margin-bottom: 0.8rem; /* Add spacing between icon and content */
+    }
+
+    .number {
+      font-size: 2rem;
     }
   }
 </style>
