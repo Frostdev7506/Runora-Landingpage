@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/sections/Hero.astro';
+import Features from '../components/sections/Features.astro';
+import Stats from '../components/sections/Stats.astro';
+import Timeline from '../components/sections/Timeline.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+---
+
+<Layout title="Runora - Smart Budget Tracking App">
+  <Header />
+  <main>
+    <Hero />
+    <Stats />
+    <Features />
+    <Timeline />
+    <Testimonials />
+
+    <section id="download" class="download section-padding">
+      <div class="container">
+        <div class="download-content">
+          <h2>Ready to Take Control of Your Finances?</h2>
+          <p>Join our growing community of users who are mastering their financial future with Runora.</p>
+          <div class="cta-buttons">
+            <a href="https://github.com/yourusername/runora" class="button button-primary">
+              <span>View on GitHub</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">Runora</div>
+        <p>&copy; 2024 Runora. Open source and free to use.</p>
+        <div class="footer-links">
+          <a href="#features">Features</a>
+          <a href="#download">Download</a>
+          <a href="https://github.com/yourusername/runora/issues">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</Layout>
+
+<style>
+  .download {
+    background: linear-gradient(rgba(var(--color-primary), 0.05), rgba(var(--color-primary), 0.1));
+    text-align: center;
+  }
+
+  .download-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .download h2 {
+    font-size: 2.5rem;
+    color: rgb(var(--color-text));
+    margin-bottom: 1rem;
+  }
+
+  .download p {
+    font-size: 1.2rem;
+    color: rgb(var(--color-text-light));
+    margin-bottom: 2rem;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+  }
+
+  .button svg {
+    margin-left: 0.5rem;
+  }
+
+  footer {
+    background: rgb(var(--color-primary));
+    color: white;
+    padding: 3rem 0;
+  }
+
+  .footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .footer-logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 2rem;
+  }
+
+  .footer-links a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+  }
+
+  .footer-links a:hover {
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .download h2 {
+      font-size: 2rem;
+    }
+
+    .download p {
+      font-size: 1.1rem;
+    }
+
+    .footer-links {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
+</style>

@@ -1,0 +1,54 @@
+---
+import StatCard from '../ui/StatCard.astro';
+
+const stats = [
+  {
+    number: "10K+",
+    label: "Active Users",
+    delay: "0"
+  },
+  {
+    number: "$2M+",
+    label: "Expenses Tracked",
+    delay: "100"
+  },
+  {
+    number: "4.8",
+    label: "App Rating",
+    delay: "200"
+  },
+  {
+    number: "50+",
+    label: "Contributors",
+    delay: "300"
+  }
+];
+---
+
+<section class="stats section-padding-sm">
+  <div class="container">
+    <div class="stats-grid">
+      {stats.map(stat => (
+        <div data-aos="zoom-in" data-aos-delay={stat.delay}>
+          <StatCard {...stat} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

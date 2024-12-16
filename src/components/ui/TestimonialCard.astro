@@ -1,0 +1,115 @@
+---
+interface Props {
+  quote: string;
+  author: string;
+  role: string;
+  image?: string;
+}
+
+const { quote, author, role, image } = Astro.props;
+---
+
+<div class="testimonial-card">
+  <div class="quote">{quote}</div>
+  <div class="author">
+    <div class="author-image">
+      {image ? (
+        <img src={image} alt={author} />
+      ) : (
+        <div class="author-placeholder">
+          {author.charAt(0)}
+        </div>
+      )}
+    </div>
+    <div class="author-info">
+      <div class="name">{author}</div>
+      <div class="role">{role}</div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .testimonial-card {
+    background: rgb(var(--color-primary));
+    
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease;
+  }
+
+  .testimonial-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .quote {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 1rem;
+  }
+
+  .author-image {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .author-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .author-placeholder {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  .author-info {
+    flex: 1;
+  }
+
+  .name {
+    font-weight: 600;
+    color: white;
+  }
+
+  .role {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 0.25rem;
+  }
+
+  @media (max-width: 768px) {
+    .testimonial-card {
+      padding: 1.5rem;
+    }
+
+    .quote {
+      font-size: 1rem;
+    }
+  }
+</style>

@@ -1,0 +1,84 @@
+---
+import TestimonialCard from '../ui/TestimonialCard.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const testimonials = [
+  {
+    quote: "Runora has completely transformed how I manage my finances. The interface is intuitive and the insights are invaluable.",
+    author: "Shubham Tambe",
+    role: "Freelancer",
+    image: "/testimonials/sub.jpg",
+    delay: "0"
+  },
+  {
+    quote: "As a corporate guy, this app helps me stay on top of my expenses. The budgeting features are exactly what I needed.",
+    author: "Sagar ",
+    role: "Senior Analyst",
+    image: "/testimonials/sagar.jpg",
+    delay: "200"
+  },
+  {
+    quote: "The best part about Runora is how it grows with the community. New features are always being added!",
+    author: "Shardul Tambe",
+    role: "Software Developer",
+    image: "/testimonials/shar.jpg",
+    delay: "400"
+  }
+];
+---
+
+<section class="testimonials section-padding">
+  <div class="container">
+    <SectionHeading
+      title="What Our Users Say"
+      subtitle="Join thousands of satisfied users who trust Runora for their financial tracking"
+    />
+    <div class="testimonials-grid">
+      {testimonials.map(testimonial => (
+        <div class="testimonial-wrapper" data-aos="fade-up" data-aos-delay={testimonial.delay}>
+          <TestimonialCard {...testimonial} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials {
+    background: rgb(var(--color-background-alt));
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
+    padding: 0 2rem;
+  }
+
+  .testimonial-wrapper {
+    height: 100%;
+    min-height: 300px;
+  }
+
+  @media (max-width: 1024px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+      gap: 5rem;
+      padding: 0 1rem;
+
+    }
+
+    .testimonial-wrapper {
+      min-height: 250px;
+    }
+  }
+</style>

@@ -1,0 +1,29 @@
+/* Theme variables and color definitions */
+:root {
+  --teal-primary: 0, 128, 128;  /* #008080 */
+  --teal-light: 0, 150, 150;    /* Lighter teal */
+  --teal-dark: 0, 100, 100;     /* Darker teal */
+  --gray-50: 249, 250, 251;
+  --gray-500: 107, 114, 128;
+  --gray-700: 31, 41, 55;
+  --gray-900: 17, 24, 39;
+  
+  /* Semantic color assignments */
+  --color-primary: var(--teal-primary);
+  --color-primary-light: var(--teal-light);
+  --color-primary-dark: var(--teal-dark);
+  --color-text: var(--gray-900);
+  --color-text-light: var(--gray-500);
+  --color-background: 255, 255, 255;
+  --color-background-alt: var(--gray-50);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: 17, 24, 39;
+    --color-background-alt: 31, 41, 55;
+    --color-text: 229, 231, 235;
+    --color-text-light: 156, 163, 175;
+  }
+}

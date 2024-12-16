@@ -1,0 +1,44 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+const { title, description, icon } = Astro.props;
+---
+
+<div class="feature">
+  <div class="icon">{icon}</div>
+  <h3 class="heading-3">{title}</h3>
+  <p class="body-regular">{description}</p>
+</div>
+
+<style>
+  .feature {
+    padding: 2rem;
+    border-radius: 1rem;
+    background: rgb(var(--color-background));
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    transition: transform 0.2s;
+  }
+
+  .feature:hover {
+    transform: translateY(-5px);
+  }
+
+  .icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    margin: 0 0 1rem 0;
+    color: rgb(var(--color-text));
+  }
+
+  p {
+    margin: 0;
+    color: rgb(var(--color-text-light));
+  }
+</style>

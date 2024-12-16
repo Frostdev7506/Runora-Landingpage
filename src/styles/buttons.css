@@ -1,0 +1,28 @@
+/* Button styles */
+.button {
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.2s;
+  display: inline-block;
+}
+
+.button-primary {
+  background: rgb(var(--color-primary));
+  color: white;
+}
+
+.button-primary:hover {
+  background: rgb(var(--color-primary-light));
+}
+
+.button-secondary {
+  background: white;
+  color: rgb(var(--color-primary));
+  border: 2px solid rgb(var(--color-primary));
+}
+
+.button-secondary:hover {
+  background: rgba(var(--color-primary), 0.1);
+}

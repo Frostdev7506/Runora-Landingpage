@@ -1,0 +1,41 @@
+---
+interface Props {
+  number: string;
+  label: string;
+}
+
+const { number, label } = Astro.props;
+---
+
+<div class="stat-card">
+  <div class="number">{number}</div>
+  <div class="label">{label}</div>
+</div>
+
+<style>
+  .stat-card {
+    padding: 1.5rem;
+  }
+
+  .number {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: white;
+  }
+
+  .label {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  @media (max-width: 768px) {
+    .number {
+      font-size: 2rem;
+    }
+
+    .label {
+      font-size: 1rem;
+    }
+  }
+</style>

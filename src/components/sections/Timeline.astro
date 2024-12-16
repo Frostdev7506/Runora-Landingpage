@@ -1,0 +1,81 @@
+---
+import TimelineEntry from '../ui/TimelineEntry.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const timelineEntries = [
+  {
+    number: "1",
+    title: "Track Your Expenses",
+    description: "Easily log and categorize your daily expenses with our intuitive interface. Get real-time insights into your spending patterns.",
+    delay: "0"
+  },
+  {
+    number: "2",
+    title: "Set Smart Budgets",
+    description: "Create custom budgets for different categories and receive instant notifications when you're approaching your limits.",
+    delay: "200"
+  },
+  {
+    number: "3",
+    title: "Analyze & Optimize",
+    description: "View detailed reports and analytics to understand your financial habits better. Make informed decisions to achieve your financial goals.",
+    delay: "400"
+  },
+  {
+    number: "4",
+    title: "Secure & Private",
+    description: "Your financial data is encrypted and stored securely. We prioritize your privacy and security above everything else.",
+    delay: "600"
+  }
+];
+---
+<section class="timeline-section section-padding">
+  <div class="container">
+    <SectionHeading
+      title="How Runora Works"
+      subtitle="Your journey to financial freedom starts here"
+    />
+    <div class="timeline-container">
+      <div class="timeline">
+        {timelineEntries.map(entry => (
+          <div data-aos="fade-up" data-aos-delay={entry.delay}>
+            <TimelineEntry {...entry} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .timeline-section {
+    background: rgb(var(--color-background-alt));
+    overflow: hidden;
+  }
+
+  .timeline-container {
+    background: black;
+    border-radius: 1rem;
+    padding: 3rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-top: 3rem;
+  }
+
+  .timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding-left: 40px;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-container {
+      padding: 2rem 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .timeline {
+      padding-left: 30px;
+    }
+  }
+</style>

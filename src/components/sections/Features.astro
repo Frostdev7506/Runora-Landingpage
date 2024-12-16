@@ -1,0 +1,86 @@
+---
+import Feature from '../Feature.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const features = [
+  {
+    title: "Easy Expense Tracking",
+    description: "Log your expenses on the go with our intuitive interface and automatic categorization.",
+    icon: "📱",
+    delay: "0"
+  },
+  {
+    title: "Smart Budgeting",
+    description: "Set custom budgets and get real-time alerts when you're approaching your limits.",
+    icon: "💰",
+    delay: "100"
+  },
+  {
+    title: "Detailed Analytics",
+    description: "Visualize your spending patterns with beautiful charts and actionable insights.",
+    icon: "📊",
+    delay: "200"
+  },
+  {
+    title: "Open Source",
+    description: "Fully open-source and free to use. Contribute to make it even better!",
+    icon: "🌟",
+    delay: "300"
+  },
+  {
+    title: "Offline Support",
+    description: "Keep tracking your expenses even without an internet connection.",
+    icon: "📶",
+    delay: "400"
+  },
+  {
+    title: "Data Security",
+    description: "Your financial data is encrypted and stored securely on your device.",
+    icon: "🔒",
+    delay: "500"
+  }
+];
+---
+
+<section id="features" class="features section-padding">
+  <div class="container">
+    <SectionHeading
+      title="Why Choose Runora?"
+      subtitle="Powerful features to help you manage your finances effectively"
+    />
+    <div class="features-grid">
+      {features.map(feature => (
+        <div data-aos="fade-up" data-aos-delay={feature.delay}>
+          <Feature {...feature} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .features {
+    background: rgb(var(--color-background-alt));
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin-top: 3rem;
+    padding: 0 2rem;
+  }
+
+  @media (max-width: 1024px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+      padding: 0;
+    }
+  }
+</style>

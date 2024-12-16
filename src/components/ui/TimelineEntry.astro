@@ -1,0 +1,146 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  description: string;
+}
+const { number, title, description } = Astro.props;
+---
+<div class="timeline-entry">
+  <div class="timeline-marker">
+    <div class="timeline-circle">
+      <span class="timeline-number">{number}</span>
+    </div>
+  </div>
+  <div class="timeline-content">
+    <h3 class="timeline-title">{title}</h3>
+    <p class="timeline-description">{description}</p>
+  </div>
+</div>
+
+<style>
+  /* Base Styles */
+  .timeline-entry {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    padding-bottom: 3rem;
+    gap: 1.5rem;
+  }
+
+  /* Timeline Marker Styles */
+  .timeline-marker {
+    position: relative;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .timeline-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgb(var(--color-primary));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    border: 3px solid white;
+  }
+
+  .timeline-number {
+    color: white;
+    font-weight: bold;
+    font-size: 1.25rem;
+  }
+
+  /* Vertical Connector */
+.timeline-marker::before {
+  content: '';
+  position: absolute;
+  top: 50px; /* Align the line with the bottom of the circle */
+  left: 25px; /* Center the line horizontally relative to the circle */
+  width: 2px;
+  height: calc(100% - 50px); /* Full height minus the circle's height */
+  background-color: rgb(var(--color-primary)); /* Ensure the line is visible */
+  z-index: 1;
+}
+
+  /* Hide connector for last entry */
+  .timeline-entry:last-child .timeline-marker::before {
+    display: none;
+  }
+
+  /* Content Styles */
+  .timeline-content {
+    flex: 1;
+    padding-top: 0.5rem;
+  }
+
+  .timeline-title {
+    color: rgb(var(--color-primary));
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+  }
+
+  .timeline-description {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* Hover Effects */
+  .timeline-entry:hover .timeline-circle {
+    transform: scale(1.05);
+  }
+
+  .timeline-entry:hover .timeline-title {
+    color: #fff;
+  }
+
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .timeline-entry {
+      padding-bottom: 2rem;
+      gap: 1rem;
+    }
+
+    .timeline-marker {
+      width: 50px;
+    }
+
+    .timeline-circle {
+      width: 40px;
+      height: 40px;
+    }
+
+    .timeline-number {
+      font-size: 1rem;
+    }
+
+    .timeline-marker::before {
+      top: 40px;
+    }
+
+    .timeline-title {
+      font-size: 1.1rem;
+    }
+
+    .timeline-description {
+      font-size: 0.9rem;
+    }
+  }
+
+  /* Accessibility and Print Styles */
+  @media print {
+    .timeline-marker::before {
+      background: #000;
+    }
+  }
+</style>
