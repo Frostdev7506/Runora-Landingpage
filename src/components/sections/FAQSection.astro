@@ -1,0 +1,117 @@
+---
+---
+<section id="faq" class="faq section-padding">
+  <div class="container">
+    <h2>Frequently asked questions</h2>
+    <div class="faq-list">
+      <details>
+        <summary class="faq-item">
+          <span>What is Gemini Advanced?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+          <div class="faq-content"><p>Gemini Advanced is a premium version of the Gemini AI model, offering enhanced capabilities and features.</p></div>
+      </details>
+      <details>
+        <summary class="faq-item">
+           <span>How do I upgrade to Gemini Advanced?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+           <div class="faq-content"><p>To upgrade to Gemini Advanced, navigate to the upgrade section on the product platform or within your account settings.</p></div>
+      </details>
+      <details>
+        <summary class="faq-item">
+          <span>Will Gemini Advanced work in the Gemini mobile app?</span>
+           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+           <div class="faq-content"><p>Yes, Gemini Advanced is designed to function seamlessly within the Gemini mobile app, providing access to its advanced features.</p></div>
+      </details>
+      <details>
+        <summary class="faq-item">
+          <span>How do I know which model Gemini is using in its responses?</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+        </summary>
+           <div class="faq-content"><p>The model being used is often indicated in the response information or within the app settings. Look for a model indicator within the response itself.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    text-align: left;
+  }
+
+  .faq h2 {
+    font-size: 2.2rem;
+    text-align: center;
+    color: rgb(var(--color-text));
+    margin-bottom: 2rem;
+  }
+
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq-list details {
+    margin-bottom: 1rem;
+    border: 1px solid rgba(var(--color-primary), 0.2);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    background: rgba(var(--color-primary), 0.05);
+  }
+
+  .faq-list details[open] {
+    background: rgba(var(--color-primary), 0.1);
+  }
+
+   .faq-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      list-style: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+     padding-bottom: 0.5rem;
+   }
+
+  .faq-list summary {
+    list-style: none;
+    padding: 0;
+  }
+    .faq-list summary::-webkit-details-marker {
+        display: none;
+    }
+
+
+ .faq-list details:not([open]) .faq-content {
+      overflow: hidden;
+      max-height: 0;
+ }
+    .faq-list .faq-content {
+        transition: max-height 0.3s ease-in-out;
+    }
+  .faq-list p {
+    font-size: 1rem;
+    color: rgb(var(--color-text-light));
+      padding-top: 0.5rem;
+  }
+
+    .faq-item svg {
+       transition: transform 0.3s ease-in-out;
+    }
+   .faq-list details[open] summary svg {
+      transform: rotate(180deg);
+    }
+
+    @media (max-width: 768px) {
+        .faq h2 {
+            font-size: 2rem;
+        }
+
+        .faq-list summary {
+            font-size: 1rem;
+        }
+    }
+</style>
