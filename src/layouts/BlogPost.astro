@@ -1,20 +1,225 @@
 ---
-export interface Props {
-  title: string;
-}
+import Layout from './Layout.astro';
+const { frontmatter } = Astro.props;
 
-const { title } = Astro.props;
+const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+});
 ---
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{title}</title>
-  </head>
-  <body>
-    <main>
-      <h1>{title}</h1>
-      <slot />
+
+<Layout title={frontmatter.title}>
+    <main class="blog-post">
+        <article class="post-content">
+            <div class="container">
+                <!-- Post Header -->
+                <header class="post-header">
+                    <nav class="post-nav">
+                        <a href="/blog" class="back-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m15 18-6-6 6-6"/>
+                            </svg>
+                            Back to Blog
+                        </a>
+                    </nav>
+                    <div class="post-meta">
+                        <time datetime={frontmatter.date}>{formattedDate}</time>
+                        {frontmatter.category && <span class="category">{frontmatter.category}</span>}
+                    </div>
+                    <h1>{frontmatter.title}</h1>
+                    {frontmatter.description && <p class="description">{frontmatter.description}</p>}
+                </header>
+
+                <!-- Post Body -->
+                <div class="post-body">
+                    <slot />
+                </div>
+            </div>
+        </article>
     </main>
-  </body>
-</html>
+</Layout>
+
+<style>
+    .blog-post {
+        background: #fff;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+    }
+
+    .post-content {
+        padding: 4rem 0 6rem;
+    }
+
+    /* Navigation */
+    .post-nav {
+        margin-bottom: 3rem;
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #666;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+    }
+
+    .back-link:hover {
+        color: rgb(var(--color-primary));
+    }
+
+    /* Post Header */
+    .post-header {
+        margin-bottom: 4rem;
+    }
+
+    .post-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        font-size: 0.925rem;
+        color: #666;
+    }
+
+    .category {
+        background: rgba(var(--color-primary), 0.1);
+        color: rgb(var(--color-primary));
+        padding: 0.25rem 0.75rem;
+        border-radius: 100px;
+        font-weight: 500;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        line-height: 1.2;
+        letter-spacing: -0.02em;
+        color: #000;
+        margin-bottom: 1.5rem;
+    }
+
+    .description {
+        font-size: 1.25rem;
+        line-height: 1.6;
+        color: #444;
+    }
+
+    /* Post Body Styles */
+    .post-body {
+        font-size: 1.125rem;
+        line-height: 1.8;
+        color: #333;
+    }
+
+    .post-body :global(h2) {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 3rem 0 1.5rem;
+        color: #000;
+    }
+
+    .post-body :global(h3) {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 2rem 0 1rem;
+        color: #000;
+    }
+
+    .post-body :global(p) {
+        margin-bottom: 1.5rem;
+    }
+
+    .post-body :global(ul), 
+    .post-body :global(ol) {
+        margin: 1.5rem 0;
+        padding-left: 1.5rem;
+    }
+
+    .post-body :global(li) {
+        margin-bottom: 0.5rem;
+    }
+
+    .post-body :global(pre) {
+        background: #f6f8fa;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        overflow-x: auto;
+        margin: 2rem 0;
+        font-size: 0.925rem;
+    }
+
+    .post-body :global(code) {
+        background: #f6f8fa;
+        padding: 0.2rem 0.4rem;
+        border-radius: 0.25rem;
+        font-size: 0.925em;
+        color: rgb(var(--color-primary));
+    }
+
+    .post-body :global(img) {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.5rem;
+        margin: 2rem 0;
+    }
+
+    .post-body :global(blockquote) {
+        border-left: 4px solid rgb(var(--color-primary));
+        padding-left: 1.5rem;
+        margin: 2rem 0;
+        font-style: italic;
+        color: #555;
+    }
+
+    .post-body :global(hr) {
+        border: none;
+        border-top: 2px solid #eee;
+        margin: 3rem 0;
+    }
+
+    .post-body :global(a) {
+        color: rgb(var(--color-primary));
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 2px;
+        transition: color 0.2s ease;
+    }
+
+    .post-body :global(a:hover) {
+        color: rgb(var(--color-secondary));
+    }
+
+    @media (max-width: 768px) {
+        .post-content {
+            padding: 2rem 0 4rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        .description {
+            font-size: 1.125rem;
+        }
+
+        .post-body {
+            font-size: 1rem;
+        }
+
+        .post-body :global(h2) {
+            font-size: 1.75rem;
+        }
+
+        .post-body :global(h3) {
+            font-size: 1.25rem;
+        }
+    }
+</style>

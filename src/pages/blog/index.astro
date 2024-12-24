@@ -1,0 +1,302 @@
+---
+import BlogPostPreview from '../../components/BlogPostPreview.astro';
+import Layout from '../../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+
+// Sort posts by date in descending order (newest first)
+const allPosts = await Astro.glob('./*.md');
+const sortedPosts = allPosts.sort((a, b) => 
+  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+);
+
+const featuredPost = sortedPosts[0];
+const regularPosts = sortedPosts.slice(1);
+---
+
+<Layout title="Blog | Your Site Name">
+    <main class="blog-main">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-eyebrow">Welcome to our</span>
+                    <h1>Journal & Stories</h1>
+                    <p class="hero-subtitle">Exploring ideas, sharing insights, and documenting our journey.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Post Section -->
+        <section class="featured-section">
+            <div class="container">
+                {featuredPost && (
+                    <article class="featured-post">
+                        <div class="featured-content">
+                            <div class="featured-meta">
+                                <span class="featured-tag">Featured Post</span>
+                                <time datetime={featuredPost.frontmatter.date}>
+                                    {new Date(featuredPost.frontmatter.date).toLocaleDateString('en-US', {
+                                        year: 'numeric',
+                                        month: 'long',
+                                        day: 'numeric'
+                                    })}
+                                </time>
+                            </div>
+                            <h2>{featuredPost.frontmatter.title}</h2>
+                            <p class="featured-excerpt">{featuredPost.frontmatter.description}</p>
+                            <a href={featuredPost.url} class="featured-link">
+                                Read Article
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M5 12h14"></path>
+                                    <path d="m12 5 7 7-7 7"></path>
+                                </svg>
+                            </a>
+                        </div>
+                        <div class="featured-image">
+                            <div class="image-placeholder">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                                    <path d="m21 15-5-5L5 21"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </article>
+                )}
+            </div>
+        </section>
+
+        <!-- Regular Posts Grid -->
+        <section class="posts-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Latest Articles</h2>
+                    <div class="header-line"></div>
+                </div>
+                <div class="posts-grid">
+                    {regularPosts.map(post => (
+                        <BlogPostPreview
+                            title={post.frontmatter.title}
+                            description={post.frontmatter.description}
+                            date={post.frontmatter.date}
+                            slug={post.url}
+                        />
+                    ))}
+                </div>
+            </div>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    .blog-main {
+        background: #fff;
+        min-height: 100vh;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        padding: 8rem 0 4rem;
+        background: linear-gradient(
+            to bottom,
+            rgba(var(--color-primary), 0.03),
+            rgba(var(--color-primary), 0)
+        );
+    }
+
+    .hero-content {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+        font-size: 1.125rem;
+        font-weight: 500;
+        color: rgb(var(--color-primary));
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    h1 {
+        font-size: 5rem;
+        font-weight: 900;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        color: #000;
+        margin-bottom: 1.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        color: #666;
+        line-height: 1.6;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    /* Featured Post Section */
+    .featured-section {
+        padding: 4rem 0;
+    }
+
+    .featured-post {
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 4rem;
+        align-items: center;
+        background: white;
+        border-radius: 24px;
+        padding: 3rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .featured-meta {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .featured-tag {
+        background: rgba(var(--color-primary), 0.1);
+        color: rgb(var(--color-primary));
+        padding: 0.5rem 1rem;
+        border-radius: 100px;
+        font-size: 0.875rem;
+        font-weight: 600;
+    }
+
+    .featured-meta time {
+        color: #666;
+        font-size: 0.875rem;
+    }
+
+    .featured-content h2 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+        color: #000;
+    }
+
+    .featured-excerpt {
+        font-size: 1.125rem;
+        line-height: 1.6;
+        color: #444;
+        margin-bottom: 2rem;
+    }
+
+    .featured-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+        color: rgb(var(--color-primary));
+        text-decoration: none;
+        font-size: 1.125rem;
+        transition: gap 0.3s ease;
+    }
+
+    .featured-link:hover {
+        gap: 0.75rem;
+    }
+
+    .featured-link svg {
+        transition: transform 0.3s ease;
+    }
+
+    .featured-link:hover svg {
+        transform: translateX(4px);
+    }
+
+    .featured-image {
+        aspect-ratio: 4/3;
+        background: rgba(var(--color-primary), 0.05);
+        border-radius: 16px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .image-placeholder svg {
+        width: 64px;
+        height: 64px;
+        color: rgb(var(--color-primary));
+        opacity: 0.5;
+    }
+
+    /* Posts Grid Section */
+    .posts-section {
+        padding: 4rem 0 8rem;
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #000;
+        letter-spacing: -0.02em;
+    }
+
+    .header-line {
+        flex-grow: 1;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.1);
+    }
+
+    .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+        .featured-post {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 4rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .hero-section {
+            padding: 6rem 0 3rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+        }
+
+        .featured-content h2 {
+            font-size: 2rem;
+        }
+
+        .posts-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .container {
+            padding: 0 1.5rem;
+        }
+    }
+</style>

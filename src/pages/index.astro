@@ -6,12 +6,12 @@ import Features from '../components/sections/Features.astro';
 import Stats from '../components/sections/Stats.astro';
 import Timeline from '../components/sections/Timeline.astro';
 import Testimonials from '../components/sections/Testimonials.astro';
-import DownloadSection from '../components/DownloadSection.astro'; 
-import Footer from '../components/Footer.astro'; 
+import DownloadSection from '../components/sections/DownloadSection.astro';
+import Footer from '../components/Footer.astro';
 import FAQSection from '../components/sections/FAQSection.astro';
+import BlogSection from '../components/sections/BlogSection.astro' // Import BlogSection component
 ---
-
-<Layout title="Runora - Smart Budget Tracking App">
+ <Layout title="Runora - Smart Budget Tracking App">
   <Header />
   <main>
     <Hero />
@@ -19,9 +19,9 @@ import FAQSection from '../components/sections/FAQSection.astro';
     <Features />
     <Timeline />
     <Testimonials />
-    <FAQSection />
-
     <DownloadSection />
+     <FAQSection />
+     <BlogSection /> {/* Use the BlogSection component here */}
   </main>
- <Footer />
+  <Footer />
 </Layout>
