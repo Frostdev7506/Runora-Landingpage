@@ -5,7 +5,7 @@ import { Image } from 'astro:assets';
 
 // Sort posts by date in descending order (newest first)
 const allPosts = await Astro.glob('./*.md');
-const sortedPosts = allPosts.sort((a, b) => 
+const sortedPosts = allPosts.sort((a, b) =>
   new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
 );
 
@@ -90,7 +90,7 @@ const regularPosts = sortedPosts.slice(1);
 
 <style>
     .blog-main {
-        background: #fff;
+        background: linear-gradient(rgba(var(--color-primary), 0.2), rgba(var(--color-primary), 0.3));
         min-height: 100vh;
     }
 
@@ -105,8 +105,8 @@ const regularPosts = sortedPosts.slice(1);
         padding: 8rem 0 4rem;
         background: linear-gradient(
             to bottom,
-            rgba(var(--color-primary), 0.03),
-            rgba(var(--color-primary), 0)
+             rgba(var(--color-primary), 0.03),
+              rgba(var(--color-primary), 0)
         );
     }
 
@@ -116,26 +116,26 @@ const regularPosts = sortedPosts.slice(1);
         margin: 0 auto;
     }
 
-    .hero-eyebrow {
+     .hero-eyebrow {
         font-size: 1.125rem;
         font-weight: 500;
-        color: rgb(var(--color-primary));
+         color: rgb(var(--color-secondary));
         margin-bottom: 1rem;
         display: block;
     }
 
-    h1 {
+     h1 {
         font-size: 5rem;
         font-weight: 900;
         line-height: 1.1;
         letter-spacing: -0.03em;
-        color: #000;
+        color: #fff;
         margin-bottom: 1.5rem;
     }
 
-    .hero-subtitle {
+     .hero-subtitle {
         font-size: 1.25rem;
-        color: #666;
+        color: #ddd;
         line-height: 1.6;
         max-width: 600px;
         margin: 0 auto;
@@ -151,7 +151,7 @@ const regularPosts = sortedPosts.slice(1);
         grid-template-columns: 1.2fr 0.8fr;
         gap: 4rem;
         align-items: center;
-        background: white;
+        background: #1a1a1a;
         border-radius: 24px;
         padding: 3rem;
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
@@ -165,42 +165,42 @@ const regularPosts = sortedPosts.slice(1);
         margin-bottom: 1.5rem;
     }
 
-    .featured-tag {
-        background: rgba(var(--color-primary), 0.1);
-        color: rgb(var(--color-primary));
+     .featured-tag {
+         background: rgba(var(--color-secondary), 0.2);
+         color: rgb(var(--color-secondary));
         padding: 0.5rem 1rem;
         border-radius: 100px;
         font-size: 0.875rem;
         font-weight: 600;
     }
 
-    .featured-meta time {
-        color: #666;
+     .featured-meta time {
+        color: #bbb;
         font-size: 0.875rem;
     }
 
     .featured-content h2 {
-        font-size: 2.5rem;
+       font-size: 2.5rem;
         font-weight: 800;
         line-height: 1.2;
         margin-bottom: 1rem;
         letter-spacing: -0.02em;
-        color: #000;
+        color: #fff;
     }
 
     .featured-excerpt {
-        font-size: 1.125rem;
+       font-size: 1.125rem;
         line-height: 1.6;
-        color: #444;
+        color: #ddd;
         margin-bottom: 2rem;
     }
 
-    .featured-link {
+     .featured-link {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
         font-weight: 600;
-        color: rgb(var(--color-primary));
+         color: rgb(var(--color-secondary));
         text-decoration: none;
         font-size: 1.125rem;
         transition: gap 0.3s ease;
@@ -220,7 +220,7 @@ const regularPosts = sortedPosts.slice(1);
 
     .featured-image {
         aspect-ratio: 4/3;
-        background: rgba(var(--color-primary), 0.05);
+         background: #2a2a2a;
         border-radius: 16px;
         overflow: hidden;
         display: flex;
@@ -228,10 +228,10 @@ const regularPosts = sortedPosts.slice(1);
         justify-content: center;
     }
 
-    .image-placeholder svg {
-        width: 64px;
+     .image-placeholder svg {
+       width: 64px;
         height: 64px;
-        color: rgb(var(--color-primary));
+        color: rgb(var(--color-secondary));
         opacity: 0.5;
     }
 
@@ -248,16 +248,16 @@ const regularPosts = sortedPosts.slice(1);
     }
 
     .section-header h2 {
-        font-size: 2rem;
+       font-size: 2rem;
         font-weight: 800;
-        color: #000;
+        color: #fff;
         letter-spacing: -0.02em;
     }
 
     .header-line {
         flex-grow: 1;
         height: 1px;
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.1);
     }
 
     .posts-grid {

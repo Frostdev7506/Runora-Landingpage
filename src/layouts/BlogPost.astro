@@ -42,14 +42,16 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
 
 <style>
     .blog-post {
-        background: #fff;
+        background: linear-gradient(rgba(var(--color-primary), 0.2), rgba(var(--color-primary), 0.3));
         min-height: 100vh;
     }
 
     .container {
+        background:#1a1a1a;
         max-width: 800px;
         margin: 0 auto;
-        padding: 0 1.5rem;
+        padding: 5rem 4.5rem;
+        border-radius: 24px;
     }
 
     .post-content {
@@ -65,14 +67,14 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        color: #666;
+        color: #ccc;
         text-decoration: none;
         font-weight: 500;
         transition: color 0.2s ease;
     }
 
     .back-link:hover {
-        color: rgb(var(--color-primary));
+        color: rgb(var(--color-secondary));
     }
 
     /* Post Header */
@@ -86,12 +88,12 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
         gap: 1rem;
         margin-bottom: 1.5rem;
         font-size: 0.925rem;
-        color: #666;
+        color: #bbb;
     }
 
     .category {
-        background: rgba(var(--color-primary), 0.1);
-        color: rgb(var(--color-primary));
+        background: rgba(var(--color-secondary), 0.2);
+        color: rgb(var(--color-secondary));
         padding: 0.25rem 0.75rem;
         border-radius: 100px;
         font-weight: 500;
@@ -102,42 +104,42 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
         font-weight: 800;
         line-height: 1.2;
         letter-spacing: -0.02em;
-        color: #000;
+        color: #fff;
         margin-bottom: 1.5rem;
     }
 
     .description {
         font-size: 1.25rem;
         line-height: 1.6;
-        color: #444;
+        color: #ddd;
     }
 
     /* Post Body Styles */
     .post-body {
         font-size: 1.125rem;
         line-height: 1.8;
-        color: #333;
+        color: #ddd;
     }
 
     .post-body :global(h2) {
         font-size: 2rem;
         font-weight: 700;
         margin: 3rem 0 1.5rem;
-        color: #000;
+        color: #fff;
     }
 
     .post-body :global(h3) {
         font-size: 1.5rem;
         font-weight: 600;
         margin: 2rem 0 1rem;
-        color: #000;
+        color: #fff;
     }
 
     .post-body :global(p) {
         margin-bottom: 1.5rem;
     }
 
-    .post-body :global(ul), 
+    .post-body :global(ul),
     .post-body :global(ol) {
         margin: 1.5rem 0;
         padding-left: 1.5rem;
@@ -148,20 +150,21 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
     }
 
     .post-body :global(pre) {
-        background: #f6f8fa;
+       background: #2a2a2a;
         padding: 1.5rem;
         border-radius: 0.5rem;
         overflow-x: auto;
         margin: 2rem 0;
         font-size: 0.925rem;
+        color: #eee;
     }
 
     .post-body :global(code) {
-        background: #f6f8fa;
+       background: #2a2a2a;
+       color: rgb(var(--color-secondary));
         padding: 0.2rem 0.4rem;
         border-radius: 0.25rem;
         font-size: 0.925em;
-        color: rgb(var(--color-primary));
     }
 
     .post-body :global(img) {
@@ -172,21 +175,21 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
     }
 
     .post-body :global(blockquote) {
-        border-left: 4px solid rgb(var(--color-primary));
+        border-left: 4px solid rgb(var(--color-secondary));
         padding-left: 1.5rem;
         margin: 2rem 0;
         font-style: italic;
-        color: #555;
+        color: #888;
     }
 
     .post-body :global(hr) {
         border: none;
-        border-top: 2px solid #eee;
+        border-top: 2px solid #333;
         margin: 3rem 0;
     }
 
     .post-body :global(a) {
-        color: rgb(var(--color-primary));
+        color: rgb(var(--color-secondary));
         text-decoration: underline;
         text-decoration-thickness: 2px;
         text-underline-offset: 2px;
@@ -194,7 +197,7 @@ const formattedDate = new Date(frontmatter.date).toLocaleDateString('en-US', {
     }
 
     .post-body :global(a:hover) {
-        color: rgb(var(--color-secondary));
+         color: rgb(var(--color-primary));
     }
 
     @media (max-width: 768px) {
