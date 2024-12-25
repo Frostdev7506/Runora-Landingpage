@@ -21,36 +21,65 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
   }
 
   /* Content styling */
   .hero-content {
     max-width: 600px;
     padding: 20px;
+    border-radius: 16px; /* Material 3 rounded corners */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12); /* Material 3 elevation */
   }
 
   .heading-1 {
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    color: #fff;
+    font-family: 'Roboto', sans-serif; /* Material 3 typography */
+    font-weight: 700;
   }
 
   .body-large {
     font-size: 1.25rem;
     margin-bottom: 2rem;
-    color: #555;
+    font-family: 'Roboto', sans-serif; /* Material 3 typography */
+    line-height: 1.6;
   }
 
   /* CTA buttons styling */
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
   .cta-buttons a {
     display: inline-block;
-    margin-right: 1rem;
     padding: 0.75rem 1.5rem;
     font-size: 1rem;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 24px; /* Material 3 rounded corners */
+    font-family: 'Roboto', sans-serif; /* Material 3 typography */
+    font-weight: 500;
+    transition: all 0.3s ease;
   }
 
+  .button-primary {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12); /* Material 3 elevation */
+  }
+
+  .button-secondary {
+    border: 2px solid;
+  }
+
+  .button-primary:hover,
+  .button-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15); /* Material 3 elevation on hover */
+  }
 
   /* Animation keyframes */
   @keyframes float {
@@ -66,10 +95,11 @@
   }
 
   .floating {
-    margin-top: 6rem;
     animation: float 6s ease-in-out infinite;
     max-height: 400px;
     width: auto;
+    border-radius: 16px; /* Material 3 rounded corners */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12); /* Material 3 elevation */
   }
 
   .pulse {
@@ -81,23 +111,55 @@
     .hero-container {
       flex-direction: column;
       text-align: center;
+      padding: 1rem;
     }
 
     .hero-content {
       margin-bottom: 2rem;
     }
 
+    .heading-1 {
+      font-size: 2rem;
+    }
+
+    .body-large {
+      font-size: 1rem;
+    }
+
+    .cta-buttons {
+      justify-content: center;
+    }
+
     .floating {
-
+      max-height: 300px;
+    }
   }
-  }
-
 
   @media (max-width: 450px) {
-    
+.hero-container {
+
+height: 60vh;
+}
+
+.hero-content {
+  margin-bottom: 2rem;
+}
 
     .floating {
       display: none;
-  }
+    }
+
+    .heading-1 {
+      font-size: 1.75rem;
+    }
+
+    .body-large {
+      font-size: 0.9rem;
+    }
+
+    .cta-buttons a {
+      width: 100%;
+      margin-bottom: 1rem;
+    }
   }
 </style>

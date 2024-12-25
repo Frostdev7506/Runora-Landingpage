@@ -3,37 +3,66 @@ interface Props {
   number: string;
   title: string;
   description: string;
+  icon?: string;
+  isLast?: boolean;
 }
-const { number, title, description } = Astro.props;
+const { number, title, description, icon, isLast = false } = Astro.props;
 ---
 <div class="timeline-entry">
   <div class="timeline-marker">
     <div class="timeline-circle">
       <span class="timeline-number">{number}</span>
+      <!-- Animated dots around circle -->
+      <div class="orbit-dots">
+        {[...Array(8)].map((_, i) => (
+          <div class="dot" style={`--dot-index: ${i};`}></div>
+        ))}
+      </div>
     </div>
+    <!-- Vertical line connector -->
+    {!isLast && 
+      <div class="timeline-connector">
+        <div class="vertical-line"></div>
+        <div class="moving-pulse"></div>
+      </div>
+    }
   </div>
   <div class="timeline-content">
-    <h3 class="timeline-title">{title}</h3>
-    <p class="timeline-description">{description}</p>
+    <div class="content-wrapper">
+      {icon && <div class="finance-icon" set:html={icon} />}
+      <div class="content-text">
+        <h3 class="timeline-title">{title}</h3>
+        <p class="timeline-description">{description}</p>
+      </div>
+    </div>
   </div>
 </div>
 
 <style>
-  /* Base Styles */
   .timeline-entry {
     display: flex;
     align-items: flex-start;
     position: relative;
     padding-bottom: 3rem;
     gap: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
   }
 
-  /* Timeline Marker Styles */
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   .timeline-marker {
     position: relative;
     width: 60px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     flex-shrink: 0;
   }
 
@@ -41,44 +70,77 @@ const { number, title, description } = Astro.props;
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background-color: rgb(var(--color-primary));
+    background: linear-gradient(135deg, rgb(var(--color-primary)), rgb(var(--color-secondary)));
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     z-index: 2;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
-    border: 3px solid white;
+    box-shadow: 0 4px 15px rgba(var(--color-primary), 0.3);
+    transition: all 0.3s ease;
   }
 
-  .timeline-number {
-    color: white;
-    font-weight: bold;
-    font-size: 1.25rem;
+  .timeline-connector {
+    position: relative;
+    height: 15rem;
+    width: 2px;
+    margin-top: -5px;
   }
 
-  /* Vertical Connector */
-.timeline-marker::before {
-  content: '';
-  position: absolute;
-  top: 50px; /* Align the line with the bottom of the circle */
-  left: 25px; /* Center the line horizontally relative to the circle */
-  width: 2px;
-  height: calc(100% - 50px); /* Full height minus the circle's height */
-  background-color: rgb(var(--color-primary)); /* Ensure the line is visible */
-  z-index: 1;
-}
-
-  /* Hide connector for last entry */
-  .timeline-entry:last-child .timeline-marker::before {
-    display: none;
+  .vertical-line {
+    position: absolute;
+    top: 0;
+    left: 50%;
+   
+    transform: translateX(-50%);
+    width: 2px;
+    height: 100%;
+    background: rgba(var(--color-primary), 0.3);
   }
 
-  /* Content Styles */
-  .timeline-content {
+  .moving-pulse {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 20px;
+    background: rgb(var(--color-primary));
+    animation: pulseDown 2s ease-in-out infinite;
+    border-radius: 4px;
+  }
+
+  @keyframes pulseDown {
+    0% {
+      top: 0;
+      opacity: 1;
+    }
+    100% {
+      top: 100%;
+      opacity: 0;
+    }
+  }
+
+  .content-wrapper {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(var(--color-primary), 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .finance-icon {
+    color: rgb(var(--color-primary));
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+  }
+
+  .content-text {
     flex: 1;
-    padding-top: 0.5rem;
   }
 
   .timeline-title {
@@ -86,25 +148,15 @@ const { number, title, description } = Astro.props;
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
     font-weight: 600;
-    transition: color 0.3s ease;
   }
 
   .timeline-description {
-    color: #666;
-    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
     line-height: 1.6;
   }
 
-  /* Hover Effects */
-  .timeline-entry:hover .timeline-circle {
-    transform: scale(1.05);
-  }
-
-  .timeline-entry:hover .timeline-title {
-    color: #fff;
-  }
-
-  /* Responsive Styles */
+  /* Mobile Styles */
   @media (max-width: 768px) {
     .timeline-entry {
       padding-bottom: 2rem;
@@ -112,7 +164,7 @@ const { number, title, description } = Astro.props;
     }
 
     .timeline-marker {
-      width: 50px;
+      width: 40px;
     }
 
     .timeline-circle {
@@ -124,8 +176,13 @@ const { number, title, description } = Astro.props;
       font-size: 1rem;
     }
 
-    .timeline-marker::before {
-      top: 40px;
+    .content-wrapper {
+      padding: 1rem;
+      flex-direction: column;
+    }
+
+    .finance-icon {
+      margin-bottom: 0.5rem;
     }
 
     .timeline-title {
@@ -135,12 +192,25 @@ const { number, title, description } = Astro.props;
     .timeline-description {
       font-size: 0.9rem;
     }
-  }
 
-  /* Accessibility and Print Styles */
-  @media print {
-    .timeline-marker::before {
-      background: #000;
+    /* Ensure vertical line is visible on mobile */
+    .timeline-connector {
+      height: 15rem;
+    }
+
+    .vertical-line {
+      width: 2px;
     }
   }
-</style>
+
+  /* Hover Effects */
+  .timeline-entry:hover .timeline-circle {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(var(--color-primary), 0.4);
+  }
+
+  .timeline-entry:hover .content-wrapper {
+    transform: translateX(5px);
+    background: rgba(255, 255, 255, 0.08);
+  }
+</style>  
