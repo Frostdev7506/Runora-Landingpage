@@ -42,16 +42,22 @@ const features = [
 ];
 ---
 
-<section id="features" class="features section-padding">
+<section id="features" class="features">
   <div class="container">
-    <SectionHeading
-      title="Why Choose Runora?"
-      subtitle="Powerful features to help you manage your finances effectively"
-    />
+    <div class="heading-wrapper">
+      <h2 class="heading">Why Choose Runora?</h2>
+      <p class="subheading">Powerful features to help you manage your finances effectively</p>
+    </div>
+    
     <div class="features-grid">
-      {features.map(feature => (
-        <div data-aos="fade-up" data-aos-delay={feature.delay}>
-          <Feature {...feature} />
+      {features.map((feature, index) => (
+        <div class="feature-card" style={`--delay: ${feature.delay}ms`}>
+          <div class="card-gradient"></div>
+          <div class="icon-wrapper">
+            <span class="icon">{feature.icon}</span>
+          </div>
+          <h3 class="card-title">{feature.title}</h3>
+          <p class="card-description">{feature.description}</p>
         </div>
       ))}
     </div>
@@ -60,27 +66,197 @@ const features = [
 
 <style>
   .features {
-    background: rgb(var(--color-background-alt));
+    background: linear-gradient(to bottom, 
+      rgb(var(--color-background-alt)) 0%,
+      rgba(var(--color-background), 0.8) 100%
+    );
+    padding: 6rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .heading-wrapper {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .heading {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, 
+      rgb(var(--color-primary)) 0%,
+      rgba(var(--color-secondary), 0.8) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+   color: rgb(var(--color-text-muted));
+  }
+
+  .subheading {
+    color: rgb(var(--color-text-muted));
+    font-size: 1.125rem;
+    max-width: 600px;
+    margin: 0 auto;
   }
 
   .features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2.5rem;
-    margin-top: 3rem;
-    padding: 0 2rem;
+    gap: 2rem;
+   
   }
 
+  .feature-card {
+    position: relative;
+    background: rgba(var(--color-card), 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 1.25rem;
+    border: 1px solid #008080;
+    padding: 2rem;
+    margin-bottom: 1rem;
+   
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: fadeIn 0.6s ease backwards;
+    animation-delay: var(--delay);
+  }
+
+  .card-gradient {
+    position: absolute;
+    inset: 0;
+    border-radius: 1.25rem;
+    background: linear-gradient(135deg,
+      rgba(var(--color-primary), 0.1) 0%,
+      rgba(var(--color-secondary), 0.1) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px -15px rgba(var(--color-shadow), 0.5);
+  }
+
+  .feature-card:hover .card-gradient {
+    opacity: 1;
+  }
+
+  .icon-wrapper {
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+  }
+
+  .icon {
+    font-size: 3rem;
+    display: block;
+  }
+
+  .feature-card:hover .icon-wrapper {
+    transform: scale(1.1);
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: rgb(var(--color-text));
+  }
+
+  .card-description {
+    color: rgb(var(--color-text-muted));
+    line-height: 1.6;
+    flex-grow: 1;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Mouse follow effect */
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      rgba(var(--color-primary), 0.06),
+      transparent 40%
+    );
+    border-radius: 1.25rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .feature-card:hover::before {
+    opacity: 1;
+  }
+
+  /* Responsive styles */
   @media (max-width: 1024px) {
     .features-grid {
       grid-template-columns: repeat(2, 1fr);
     }
+    
+    .heading {
+      font-size: 2.25rem;
+    }
   }
 
   @media (max-width: 768px) {
+    .features {
+      padding: 4rem 0;
+    }
+
     .features-grid {
       grid-template-columns: 1fr;
-      padding: 0;
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      min-height: auto;
+      padding: 1.75rem;
+    }
+
+    .heading {
+      font-size: 2rem;
+    }
+
+    .subheading {
+      font-size: 1rem;
     }
   }
 </style>
+
+<script>
+  // Add mouse follow effect
+  const cards = document.querySelectorAll('.feature-card');
+  cards.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = ((e.clientX - rect.left) / card.clientWidth) * 100;
+      const y = ((e.clientY - rect.top) / card.clientHeight) * 100;
+      card.style.setProperty('--mouse-x', `${x}%`);
+      card.style.setProperty('--mouse-y', `${y}%`);
+    });
+  });
+</script>
